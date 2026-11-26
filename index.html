@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KOVA Studio — Accesorios de precisión</title>
+<meta name="description" content="Accesorios minimalistas de precisión para tu ecosistema. Proyecto de portafolio UX/UI.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFBFD;--sf:#F4F4F6;--tx:#111113;--mu:#6E6E73;--ln:rgba(0,0,0,.08);--ac:#4A554E;--e:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+svg{display:block}
+.w{max-width:1280px;margin:auto;padding-left:24px;padding-right:24px}
+section{padding:112px 0;scroll-margin-top:72px}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.1}
+h1{font-size:clamp(40px,5.5vw,72px)}
+h2{font-size:clamp(30px,4vw,44px);margin-bottom:40px}
+.k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
+.n{font-variant-numeric:tabular-nums}
+.mu{color:var(--mu);font-size:14px}
+.btn{display:inline-flex;justify-content:center;align-items:center;background:#000;color:#fff;border-radius:99px;padding:13px 24px;font-size:14px;transition:.4s var(--e)}
+.btn:hover{transform:translateY(-2px)}
+.link{font-size:14px;border-bottom:1px solid var(--ln);padding-bottom:2px}
+.c{fill:var(--c)}
+.cs{fill:none;stroke:var(--c);stroke-width:9;stroke-linecap:round}
+
+header{position:sticky;top:0;z-index:20;background:rgba(251,251,253,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--ln)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;flex-wrap:wrap}
+.logo{font-weight:600;letter-spacing:.24em}
+nav{display:flex;gap:32px;font-size:13px}
+.acts{display:flex;gap:16px;align-items:center}
+.acts button{display:flex;gap:6px;align-items:center;font-size:13px}
+#search{display:none;width:100%;border:0;border-bottom:1px solid var(--ln);background:none;padding:12px 0;outline:0}
+#search.on{display:block}
+
+.hero{display:grid;grid-template-columns:5fr 6fr;gap:64px;align-items:center;padding-top:64px;padding-bottom:64px}
+.hero p{margin:24px 0 32px;max-width:400px;color:var(--mu)}
+.hero .row{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.stage{background:var(--sf);border-radius:16px;aspect-ratio:1;display:grid;place-items:center;--c:#B8B2A7}
+.stage svg{height:84%}
+
+#dispositivos{padding:40px 0;border-block:1px solid var(--ln)}
+.devs{display:flex;gap:8px;overflow-x:auto;padding:16px 0 4px}
+.dev{display:flex;gap:8px;align-items:center;white-space:nowrap;border:1px solid var(--ln);border-radius:99px;padding:10px 18px;font-size:13px;transition:.4s var(--e)}
+.dev[aria-pressed=true]{background:#000;color:#fff}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px 20px}
+.ph{position:relative;aspect-ratio:4/5;background:var(--sf);border-radius:16px;overflow:hidden}
+.art{height:100%;display:grid;place-items:center;transition:.7s var(--e)}
+.art svg,.art img{width:100%;height:100%;object-fit:cover}
+.card:hover .art,.card:focus-within .art{transform:scale(1.08) rotate(-4deg)}
+.tag{position:absolute;z-index:1;top:12px;left:12px;font-size:11px;background:#fff;color:var(--ac);border-radius:99px;padding:4px 10px;max-width:calc(100% - 24px)}
+.hov{position:absolute;z-index:1;inset:auto 12px 12px;display:grid;gap:8px;text-align:center;opacity:0;transform:translateY(12px);transition:.5s var(--e)}
+.hov span{font-size:11px;color:var(--mu)}
+.card:hover .hov,.card:focus-within .hov{opacity:1;transform:none}
+@media(hover:none){.hov{opacity:1;transform:none}.hov span{display:none}}
+.info{padding-top:16px}
+.info h3{font-size:15px;letter-spacing:-.01em;margin:4px 0}
+.sw{display:flex;gap:8px;margin:10px 0 4px}
+.dot{width:18px;height:18px;border-radius:50%;background:var(--d);border:1px solid var(--ln);transition:.3s var(--e)}
+.dot[aria-pressed=true]{box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--tx)}
+
+.bento{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.mat{background:var(--sf);border-radius:16px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:260px}
+.mat:first-child{grid-row:span 2}
+.mat h3{font-size:24px;margin:8px 0}
+.sample{flex:1;min-height:80px;border-radius:12px}
+
+.scene{position:relative;background:var(--sf);border-radius:16px;overflow:hidden}
+.scene>svg{width:100%}
+.spot{position:absolute;width:32px;height:32px;margin:-16px;border-radius:50%;background:#fff;border:1px solid var(--ln);font-size:12px;transition:.4s var(--e)}
+.spot:hover,.spot[aria-expanded=true]{background:#000;color:#fff;transform:scale(1.12)}
+#mini{margin-top:16px;border:1px solid var(--ln);border-radius:16px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--ln);padding:72px 0 32px}
+.cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;font-size:14px}
+.cols div{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+footer form{display:flex;width:100%;max-width:300px;border-bottom:1px solid var(--tx)}
+footer input{flex:1;min-width:0;border:0;background:none;padding:10px 0;outline:0}
+.seal{border:1px solid var(--ac);color:var(--ac);border-radius:99px;padding:6px 14px;font-size:12px}
+
+#veil{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:30;opacity:0;pointer-events:none;transition:.4s var(--e)}
+#drawer{position:fixed;z-index:31;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--bg);display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:.55s var(--e)}
+.open #veil{opacity:1;pointer-events:auto}
+.open #drawer{transform:none;visibility:visible}
+.dh,.df{padding:20px 24px;border-bottom:1px solid var(--ln)}
+.dh{display:flex;justify-content:space-between}
+.df{border:0;border-top:1px solid var(--ln);display:grid;gap:12px}
+#body{flex:1;overflow:auto;padding:20px 24px;display:grid;gap:20px;align-content:start}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;font-size:13px}
+.thumb{background:var(--sf);border-radius:10px;aspect-ratio:4/5}
+.qty{display:inline-flex;border:1px solid var(--ln);border-radius:99px;margin-top:8px}
+.qty button{width:30px}
+.bar{height:2px;background:var(--ln);margin-top:8px}
+.bar i{display:block;height:100%;background:var(--ac);transition:.5s var(--e)}
+.box{border:1px solid var(--ln);border-radius:12px;padding:14px;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.total{display:flex;justify-content:space-between;font-weight:500}
+
+@media(max-width:900px){
+section{padding:72px 0}
+nav{order:3;width:100%;gap:20px;overflow-x:auto;padding-bottom:10px;white-space:nowrap}
+.hero,.bento{grid-template-columns:1fr}
+.mat:first-child{grid-row:auto}
+.grid{grid-template-columns:repeat(2,1fr)}
+.cols{grid-template-columns:1fr 1fr}
+section{scroll-margin-top:104px}
+}
+@media(max-width:520px){.grid,.cols{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="w top">
+    <a href="#" class="logo">KOVA</a>
+    <nav>
+      <a href="#coleccion">Colección</a>
+      <a href="#dispositivos">Por Dispositivo</a>
+      <a href="#materiales">Materiales</a>
+      <a href="#escritorio">Escritorio</a>
+    </nav>
+    <div class="acts">
+      <button id="sbtn" aria-label="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <button id="bag">Bolsa <span id="count" class="n">0</span></button>
+    </div>
+  </div>
+  <div class="w"><input id="search" type="search" placeholder="Buscar por producto o material" aria-label="Buscar"></div>
+</header>
+
+<main>
+  <section class="w hero">
+    <div>
+      <p class="k">Colección 01</p>
+      <h1>Precisión táctil para tus dispositivos esenciales.</h1>
+      <p>Aluminio, aramida y cuero vegetal. Diseñados al milímetro para tu escritorio y tu bolsillo.</p>
+      <div class="row">
+        <a class="btn" href="#coleccion">Explorar colección</a>
+        <a class="link" href="#dispositivos">Elegir mi dispositivo</a>
+      </div>
+    </div>
+    <div class="stage" id="hero"></div>
+  </section>
+
+  <section id="dispositivos">
+    <div class="w">
+      <p class="k">Compra según tu dispositivo</p>
+      <div class="devs" id="devs"></div>
+    </div>
+  </section>
+
+  <section id="coleccion" class="w">
+    <h2>Objetos esenciales</h2>
+    <p class="mu" id="status" aria-live="polite" style="margin:-24px 0 24px"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="materiales" class="w">
+    <h2>Ingeniería en Materiales</h2>
+    <div class="bento">
+      <article class="mat">
+        <div class="sample" style="background:linear-gradient(120deg,#e4e4e7,#bfbfc4 45%,#ededf0)"></div>
+        <div><p class="k">Estructura</p><h3>Aluminio CNC reciclado</h3><p class="mu">Serie 6000, mecanizado en bloque y anodizado mate.</p></div>
+      </article>
+      <article class="mat">
+        <div class="sample" style="background:#9A5B34"></div>
+        <div><p class="k">Superficie</p><h3>Cuero de curtido vegetal</h3><p class="mu">Curtido con taninos. Desarrolla pátina con el uso.</p></div>
+      </article>
+      <article class="mat">
+        <div class="sample" style="background:radial-gradient(circle,transparent 26px,#2E2E30 27px 36px,transparent 37px)"></div>
+        <div><p class="k">Sujeción</p><h3>Imanes N52</h3><p class="mu">Anillo alineado, compatible con MagSafe.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="escritorio" class="w">
+    <h2>Completa tu Escritorio</h2>
+    <div class="scene">
+      <svg viewBox="0 0 800 450" aria-label="Escritorio con soporte, base de carga y hub">
+        <rect y="340" width="800" height="110" fill="#e6e3de"/>
+        <rect x="100" y="185" width="220" height="145" rx="10" fill="#cfcfd4"/>
+        <rect x="150" y="310" width="120" height="30" rx="10" fill="#2E2E30"/>
+        <rect x="380" y="326" width="150" height="14" rx="7" fill="#B8B2A7"/>
+        <rect x="440" y="220" width="10" height="110" fill="#B8B2A7"/>
+        <rect x="413" y="170" width="64" height="112" rx="14" fill="#2E2E30"/>
+        <circle cx="505" cy="320" r="10" fill="#B8B2A7"/>
+        <rect x="595" y="305" width="130" height="35" rx="9" fill="#8f8a82"/>
+        <path d="M612 323h18M642 323h18M672 323h18" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <button class="spot" data-spot="3" style="left:26%;top:51%">1</button>
+      <button class="spot" data-spot="1" style="left:55.6%;top:50%">2</button>
+      <button class="spot" data-spot="6" style="left:82.5%;top:71.5%">3</button>
+    </div>
+    <div id="mini"><p class="mu">Toca un número para ver el accesorio.</p></div>
+  </section>
+</main>
+
+<footer>
+  <div class="w">
+    <div class="cols">
+      <div>
+        <span class="logo">KOVA</span>
+        <p class="mu">Novedades de la colección, una vez al mes.</p>
+        <form id="news"><input type="email" required placeholder="tu@correo.com" aria-label="Correo"><button>Suscribirme</button></form>
+        <p class="mu" id="newsmsg" aria-live="polite"></p>
+      </div>
+      <div><p class="k">Tienda</p><a href="#coleccion">Colección</a><a href="#dispositivos">Por Dispositivo</a><a href="#escritorio">Escritorio</a></div>
+      <div><p class="k">Garantía</p><span>2 años de cobertura</span><span>30 días para devolver</span></div>
+      <div><p class="k">Huella</p><span class="seal">Carbono neutro</span></div>
+    </div>
+    <p class="mu" style="margin-top:56px">KOVA Studio es una marca ficticia creada para un portafolio UX/UI. Sin afiliación con Apple. No se venden productos ni se procesan pagos.</p>
+  </div>
+</footer>
+
+<div id="veil"></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-label="Tu bolsa">
+  <div class="dh"><strong>Tu bolsa</strong><button id="close">Cerrar</button></div>
+  <div id="body"></div>
+  <div class="df" id="foot"></div>
+</aside>
+
+<script>
+const $=s=>document.querySelector(s);
+const COL=[['Titanio Natural','#B8B2A7'],['Negro Grafito','#2E2E30'],['Cuero Coñac','#9A5B34'],['Piedra','#CFC9BD']];
+const IP='iPhone 16 Pro',MB='MacBook Pro',PD='iPad Pro',AW='Apple Watch Ultra',AP='AirPods';
+const P=[
+{id:1,name:'Base 3 en 1 Aluminio',mat:'Aluminio anodizado',price:149,dev:[IP,AW,AP],cols:[0,1,3],art:'charger'},
+{id:2,name:'Funda Aramida MagSafe',mat:'Fibra de aramida',price:59,dev:[IP],cols:[1,0,3],art:'case'},
+{id:3,name:'Soporte Vertical MacBook',mat:'Aluminio CNC',price:79,dev:[MB],cols:[1,0],art:'stand'},
+{id:4,name:'Correa Titanio Grado 5',mat:'Titanio',price:129,dev:[AW],cols:[0,1],art:'band'},
+{id:5,name:'Folio Magnético iPad',mat:'Cuero vegetal',price:89,dev:[PD],cols:[2,1,3],art:'folio'},
+{id:6,name:'Hub Thunderbolt 4',mat:'Aluminio reciclado',price:199,dev:[MB,PD],cols:[0,1],art:'hub'},
+{id:7,name:'Cable USB-C Trenzado 240W',mat:'Nylon trenzado',price:29,dev:[IP,MB,PD,AP],cols:[1,3,2],art:'cable'},
+{id:8,name:'Estuche de Cuero AirPods',mat:'Cuero vegetal',price:45,dev:[AP],cols:[2,1,3],art:'pods'}
+];
+P.forEach(p=>p.sel=p.cols[0]);
+
+const ART={
+charger:'<rect class="c" x="35" y="188" width="130" height="14" rx="7"/><rect class="c" x="95" y="95" width="10" height="95"/><circle class="c" cx="100" cy="80" r="38"/><circle cx="100" cy="80" r="26" fill="none" stroke="#fff" stroke-opacity=".5"/><circle class="c" cx="145" cy="180" r="11"/>',
+case:'<rect class="c" x="55" y="35" width="90" height="175" rx="22"/><rect x="64" y="44" width="46" height="46" rx="13" fill="#000" opacity=".25"/><circle cx="100" cy="135" r="28" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="3"/>',
+stand:'<rect x="30" y="70" width="140" height="112" rx="8" fill="#d6d6da"/><rect class="c" x="52" y="165" width="96" height="40" rx="11"/>',
+band:'<rect class="c" x="77" y="25" width="46" height="70" rx="8"/><rect class="c" x="77" y="150" width="46" height="70" rx="8"/><rect x="66" y="82" width="68" height="78" rx="22" fill="#1c1c1e"/><path d="M78 40h44M78 55h44M78 70h44M78 175h44M78 190h44M78 205h44" stroke="#fff" stroke-opacity=".35"/>',
+folio:'<rect class="c" x="40" y="40" width="120" height="168" rx="12"/><path d="M62 40v168" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>',
+hub:'<rect class="c" x="28" y="100" width="144" height="60" rx="13"/><path d="M48 132h18M78 132h18M108 132h18M142 132h10" stroke="#111" stroke-width="6" stroke-linecap="round"/>',
+cable:'<circle class="cs" cx="100" cy="115" r="55"/><circle class="cs" cx="100" cy="115" r="38"/><path class="cs" d="M45 115v75M155 115v75"/><rect x="37" y="185" width="16" height="26" rx="4" fill="#999"/><rect x="147" y="185" width="16" height="26" rx="4" fill="#999"/>',
+pods:'<rect class="c" x="48" y="82" width="104" height="100" rx="34"/><path d="M48 117h104" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>'
+};
+const art=p=>p.foto?`<img src="${p.foto}" alt="${p.name}" loading="lazy">`:`<svg viewBox="0 0 200 250" role="img" aria-label="${p.name}"><ellipse cx="100" cy="214" rx="68" ry="7" fill="#000" opacity=".06"/>${ART[p.art]}</svg>`;
+
+const ICON={
+'Todos':'<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/>',
+[IP]:'<rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 5h2"/>',
+[MB]:'<rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M2 19h20"/>',
+[PD]:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M11 18h2"/>',
+[AW]:'<rect x="6" y="7" width="12" height="10" rx="3"/><path d="M9 7l1-4h4l1 4M9 17l1 4h4l1-4"/>',
+[AP]:'<rect x="4" y="7" width="16" height="11" rx="5"/><path d="M4 11h16"/>'
+};
+
+let device='Todos',query='',cart=[],view='bag',last;
+
+function drawDevs(){
+  $('#devs').innerHTML=Object.keys(ICON).map(d=>`<button class="dev" data-dev="${d}" aria-pressed="${d===device}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">${ICON[d]}</svg>${d}</button>`).join('');
+}
+
+function drawGrid(){
+  const list=P.filter(p=>(device==='Todos'||p.dev.includes(device))&&(p.name+' '+p.mat).toLowerCase().includes(query));
+  $('#status').textContent=list.length?`${list.length} ${list.length===1?'producto':'productos'}`:'Sin resultados. Prueba otra búsqueda o dispositivo.';
+  $('#grid').innerHTML=list.map(p=>`
+  <article class="card" data-card="${p.id}" style="--c:${COL[p.sel][1]}">
+    <div class="ph">
+      ${device!=='Todos'?`<span class="tag">Compatible con tu ${device}</span>`:''}
+      <div class="art">${art(p)}</div>
+      <div class="hov"><span>Para ${p.dev.join(' · ')}</span><button class="btn" data-add="${p.id}">+ Añadir rápido</button></div>
+    </div>
+    <div class="info">
+      <p class="k">${p.mat}</p>
+      <h3>${p.name}</h3>
+      <p class="n">$${p.price}</p>
+      <div class="sw">${p.cols.map(i=>`<button class="dot" style="--d:${COL[i][1]}" data-color="${i}" data-id="${p.id}" aria-label="${COL[i][0]}" aria-pressed="${i===p.sel}"></button>`).join('')}</div>
+      <p class="mu cname">${COL[p.sel][0]}</p>
+    </div>
+  </article>`).join('');
+}
+
+const find=id=>P.find(p=>p.id===+id);
+
+function add(id){
+  const p=find(id),it=cart.find(i=>i.id===p.id&&i.col===p.sel);
+  it?it.q++:cart.push({id:p.id,col:p.sel,q:1});
+  view='bag';
+  drawCart();
+}
+
+function drawCart(){
+  const sub=cart.reduce((s,i)=>s+find(i.id).price*i.q,0);
+  const ship=sub>=150?0:9;
+  $('#count').textContent=cart.reduce((s,i)=>s+i.q,0);
+  const body=$('#body'),foot=$('#foot');
+  foot.hidden=false;
+  foot.style.display='grid';
+
+  if(view==='done'){
+    body.innerHTML=`<h3>Pedido simulado confirmado</h3><p class="mu">Orden KV-${Date.now().toString().slice(-6)}. Esto es una demo: no se cobró ni se enviará nada.</p>`;
+    foot.innerHTML='<button class="btn" data-act="close">Seguir explorando</button>';
+    return;
+  }
+  if(!cart.length){
+    body.innerHTML='<p class="mu">Tu bolsa está vacía.</p>';
+    foot.style.display='none';
+    return;
+  }
+  if(view==='pay'){
+    body.innerHTML=`<p class="k">Pago exprés (simulación)</p>
+    <div class="box"><span>Entrega</span><span>Calle Ejemplo 123, Ciudad Demo</span></div>
+    <div class="box"><span>Pago</span><span>Tarjeta de demostración</span></div>
+    <div class="box"><span>Envío estándar</span><span class="n">${ship?'$'+ship:'Gratis'}</span></div>
+    <p class="mu">No se piden ni se guardan datos reales.</p>`;
+    foot.innerHTML=`<div class="total n"><span>Total</span><span>$${sub+ship}</span></div><button class="btn" data-act="confirm">Confirmar pedido simulado</button><button class="link" data-act="back">Volver a la bolsa</button>`;
+    return;
+  }
+
+  const has=id=>cart.some(i=>i.id===id);
+  const SUG={1:2,2:7,3:6,4:1,5:7,6:3,7:2,8:7};
+  const sid=cart.map(i=>SUG[i.id]).find(id=>!has(id))||(!has(7)&&7);
+  const s=sid&&find(sid);
+
+  body.innerHTML=`
+  <div class="mu">${sub>=150?'Tienes envío gratis':`Te faltan <span class="n">$${150-sub}</span> para el envío gratis`}<div class="bar"><i style="width:${Math.min(sub/1.5,100)}%"></i></div></div>
+  ${cart.map((i,n)=>{const p=find(i.id);return `
+  <div class="line">
+    <div class="thumb" style="--c:${COL[i.col][1]}">${art(p)}</div>
+    <div><b>${p.name}</b><p class="mu">${COL[i.col][0]}</p>
+      <span class="qty n"><button data-q="-1" data-n="${n}" aria-label="Quitar uno">−</button><span>${i.q}</span><button data-q="1" data-n="${n}" aria-label="Sumar uno">+</button></span>
+    </div>
+    <span class="n">$${p.price*i.q}</span>
+  </div>`}).join('')}
+  ${s?`<div class="box"><span>Añade ${s.name} — <span class="n">$${s.price}</span></span><button class="link" data-add="${s.id}">Añadir</button></div>`:''}`;
+  foot.innerHTML=`<div class="total n"><span>Subtotal</span><span>$${sub} USD</span></div><button class="btn" data-act="pay">Pago exprés</button>`;
+}
+
+function toggle(open){
+  if(open){last=document.activeElement}
+  document.body.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+  document.querySelectorAll('header,main,footer').forEach(e=>e.inert=open);
+  if(open)setTimeout(()=>$('#close').focus(),50);
+  else{if(view==='done')view='bag';drawCart();last&&last.focus()}
+}
+
+document.addEventListener('click',e=>{
+  if(e.target.id==='veil')return toggle(false);
+  const b=e.target.closest('button');
+  if(!b)return;
+  const d=b.dataset;
+  if(b.id==='bag'){drawCart();toggle(true)}
+  if(b.id==='close'||d.act==='close')toggle(false);
+  if(b.id==='sbtn'){$('#search').classList.toggle('on');$('#search').focus()}
+  if(d.dev){device=d.dev;drawDevs();drawGrid();$('#coleccion').scrollIntoView()}
+  if(d.color){
+    const p=find(d.id);p.sel=+d.color;
+    const card=b.closest('.card');
+    card.style.setProperty('--c',COL[p.sel][1]);
+    card.querySelector('.cname').textContent=COL[p.sel][0];
+    card.querySelectorAll('.dot').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  }
+  if(d.add){
+    const wasOpen=document.body.classList.contains('open');
+    if(!wasOpen)toggle(true);
+    add(d.add);
+  }
+  if(d.q){
+    const i=cart[d.n];i.q+=+d.q;
+    if(i.q<1)cart.splice(d.n,1);
+    drawCart();
+  }
+  if(d.act==='pay'){view='pay';drawCart()}
+  if(d.act==='back'){view='bag';drawCart()}
+  if(d.act==='confirm'){cart=[];view='done';drawCart()}
+  if(d.spot){
+    const p=find(d.spot);
+    document.querySelectorAll('.spot').forEach(x=>x.setAttribute('aria-expanded',x===b));
+    $('#mini').innerHTML=`<div><p class="k">${p.mat}</p><h3>${p.name}</h3><p class="n">$${p.price}</p></div><button class="btn" data-add="${p.id}">Añadir a la bolsa</button>`;
+  }
+});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('open'))toggle(false)});
+$('#search').addEventListener('input',e=>{query=e.target.value.toLowerCase().trim();drawGrid();$('#coleccion').scrollIntoView()});
+$('#news').addEventListener('submit',e=>{e.preventDefault();e.target.reset();$('#newsmsg').textContent='Demo: tu correo no se guardó.'});
+
+$('#hero').innerHTML=art(P[0]);
+drawDevs();drawGrid();drawCart();
+</script>
+<style>
+section.w:not(.hero){padding-top:112px;padding-bottom:112px}
+@media(max-width:900px){section.w:not(.hero){padding-top:72px;padding-bottom:72px}}
+.stage,.card .art,.info h3{cursor:pointer}
+.stage svg{animation:float 5s ease-in-out infinite}
+.spot{animation:pulse 2s infinite}
+@keyframes float{50%{transform:translateY(-14px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,0,0,.25)}100%{box-shadow:0 0 0 14px rgba(0,0,0,0)}}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}}
+dialog{margin:auto;border:0;border-radius:16px;padding:24px;width:min(860px,calc(100% - 32px));max-height:90vh;background:var(--bg);color:var(--tx)}
+dialog[open]{animation:pop .45s var(--e)}
+dialog::backdrop{background:rgba(0,0,0,.35)}
+.x{display:block;margin:0 0 16px auto}
+.dv{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.pic{background:var(--sf);border-radius:16px;aspect-ratio:4/5}
+.pic svg{width:100%;height:100%;animation:float 5s ease-in-out infinite}
+.dv>div:last-child{display:grid;gap:12px;justify-items:start}
+.rel{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px}
+@media(max-width:700px){.dv{grid-template-columns:1fr;gap:20px}.pic{aspect-ratio:auto;height:34vh}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<dialog id="dlg"></dialog>
+<script>
+Object.assign(ART,{
+over:'<path class="cs" d="M45 140V110a55 55 0 01110 0v30"/><rect class="c" x="28" y="125" width="42" height="70" rx="20"/><rect class="c" x="130" y="125" width="42" height="70" rx="20"/>',
+inear:'<circle class="c" cx="70" cy="100" r="28"/><rect class="c" x="62" y="115" width="16" height="75" rx="8"/><circle class="c" cx="130" cy="100" r="28"/><rect class="c" x="122" y="115" width="16" height="75" rx="8"/>',
+gan:'<rect x="75" y="55" width="12" height="40" rx="3" fill="#999"/><rect x="113" y="55" width="12" height="40" rx="3" fill="#999"/><rect class="c" x="50" y="90" width="100" height="105" rx="24"/><rect x="82" y="165" width="36" height="10" rx="5" fill="#777"/>',
+disc:'<path class="cs" d="M100 150v55"/><circle class="c" cx="100" cy="105" r="55"/><circle cx="100" cy="105" r="36" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3"/>',
+battery:'<rect class="c" x="58" y="60" width="84" height="140" rx="20"/><circle cx="100" cy="115" r="26" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3"/><circle cx="100" cy="178" r="4" fill="#fff"/>',
+mat:'<rect class="c" x="18" y="80" width="164" height="110" rx="10"/><rect x="28" y="90" width="144" height="90" rx="5" fill="none" stroke="#fff" stroke-opacity=".35" stroke-dasharray="4 4"/>'
+});
+P.push(
+{id:9,name:'Audífonos Over-Ear Studio',mat:'Aluminio y cuero vegetal',price:249,dev:[IP,MB,PD],cols:[1,0,2],art:'over'},
+{id:10,name:'Audífonos In-Ear Aire',mat:'Aluminio anodizado',price:119,dev:[IP,MB,PD],cols:[3,1],art:'inear'},
+{id:11,name:'Cargador GaN 65W',mat:'Policarbonato reciclado',price:55,dev:[IP,MB,PD],cols:[3,1],art:'gan'},
+{id:12,name:'Disco de Carga MagSafe',mat:'Aluminio anodizado',price:39,dev:[IP,AP],cols:[0,1],art:'disc'},
+{id:13,name:'Batería Magnética 5000',mat:'Aluminio reciclado',price:69,dev:[IP],cols:[1,0,3],art:'battery'},
+{id:14,name:'Desk Mat de Cuero',mat:'Cuero vegetal',price:75,dev:[MB],cols:[2,1,3],art:'mat'}
+);
+const CAT={'Audio':[9,10],'Carga':[1,7,11,12,13],'Escritorio':[3,6,14],'Fundas y correas':[2,4,5,8]};
+P.forEach(p=>{p.sel??=p.cols[0];p.cat=Object.keys(CAT).find(c=>CAT[c].includes(p.id))});
+
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  io.unobserve(e.target);
+  if(!calm)e.target.animate([{opacity:0,transform:'translateY(32px)'},{opacity:1,transform:'none'}],{duration:800,easing:'cubic-bezier(.16,1,.3,1)'});
+}));
+const reveal=s=>document.querySelectorAll(s).forEach(x=>io.observe(x));
+
+let cat='Todo';
+$('#status').style.margin='16px 0 24px';
+$('#status').insertAdjacentHTML('beforebegin','<div class="devs" id="cats" style="margin-top:-24px"></div>');
+const drawCats=()=>$('#cats').innerHTML=['Todo',...Object.keys(CAT)].map(c=>`<button class="dev" data-cat="${c}" aria-pressed="${c===cat}">${c}</button>`).join('');
+const baseGrid=drawGrid;
+drawGrid=()=>{
+  baseGrid();
+  document.querySelectorAll('#grid .card').forEach(c=>{
+    if(cat!=='Todo'&&find(c.dataset.card).cat!==cat)c.remove();
+    else c.querySelector('h3').tabIndex=0;
+  });
+  const n=$('#grid').children.length;
+  $('#status').textContent=n?`${n} ${n===1?'producto':'productos'}`:'Sin resultados. Prueba otro filtro.';
+  reveal('#grid .card');
+};
+$('#cats').onclick=e=>{const c=e.target.dataset.cat;if(c){cat=c;drawCats();drawGrid()}};
+const open=e=>{const c=e.target.closest('.art,h3');if(c)location.hash='p-'+c.closest('.card').dataset.card};
+$('#grid').onclick=open;
+$('#grid').onkeydown=e=>{if(e.key==='Enter'&&e.target.matches('h3'))open(e)};
+
+const INFO={
+garantia:['Garantía de 2 años','Cubre defectos de fabricación en materiales y ensamblaje.'],
+devoluciones:['30 días para devolver','Devuelve el producto sin uso y en su empaque original.'],
+carbono:['Carbono neutro','Meta de marca: empaques sin plástico y envíos compensados.'],
+aluminio:['Aluminio CNC reciclado','Se mecaniza en bloque y se anodiza para resistir rayones.'],
+cuero:['Cuero de curtido vegetal','Se curte con taninos y cambia de tono con el uso.'],
+imanes:['Imanes N52','Un anillo de imanes alinea el dispositivo al acercarlo.']
+};
+const dlg=$('#dlg'),X='<button class="link x" data-x>Cerrar</button>';
+function route(){
+  const h=location.hash.slice(1),p=h.startsWith('p-')&&find(h.slice(2));
+  if(p){
+    const rel=P.filter(r=>r.cat===p.cat&&r.id!==p.id).slice(0,3);
+    dlg.innerHTML=`${X}<div class="card dv" style="--c:${COL[p.sel][1]}">
+    <div class="pic">${art(p)}</div>
+    <div><p class="k">${p.cat} · ${p.mat}</p><h2 style="margin:0">${p.name}</h2><p class="n">$${p.price} USD</p>
+    <div class="sw">${p.cols.map(i=>`<button class="dot" style="--d:${COL[i][1]}" data-color="${i}" data-id="${p.id}" aria-label="${COL[i][0]}" aria-pressed="${i===p.sel}"></button>`).join('')}</div>
+    <p class="mu cname">${COL[p.sel][0]}</p><p class="mu">Compatible con ${p.dev.join(', ')}.</p>
+    <button class="btn" data-add="${p.id}">Añadir a la bolsa</button></div></div>
+    <div class="rel"><span class="k">También te puede gustar</span>${rel.map(r=>`<a class="link" href="#p-${r.id}">${r.name}</a>`).join('')}</div>`;
+  }else if(INFO[h]){
+    dlg.innerHTML=`${X}<h2 style="margin-bottom:16px">${INFO[h][0]}</h2><p>${INFO[h][1]}</p><p class="mu" style="margin:16px 0 24px">Contenido de demostración de una marca ficticia.</p><a class="btn" href="#coleccion">Ver productos</a>`;
+  }else return dlg.open&&dlg.close();
+  if(!dlg.open)dlg.showModal();
+  dlg.scrollTop=0;
+}
+dlg.onclick=e=>{if(e.target===dlg||e.target.closest('[data-x],[data-add]'))dlg.close()};
+dlg.onclose=()=>{
+  const h=location.hash.slice(1);
+  if(h.startsWith('p-')||INFO[h])history.replaceState(null,'',location.pathname+location.search);
+  drawGrid();
+};
+addEventListener('hashchange',route);
+
+const cols=document.querySelectorAll('.cols>div');
+cols[2].innerHTML='<p class="k">Garantía</p><a href="#garantia">2 años de cobertura</a><a href="#devoluciones">30 días para devolver</a>';
+cols[3].innerHTML='<p class="k">Huella</p><a class="seal" href="#carbono">Carbono neutro</a>';
+document.querySelectorAll('.mat>div:last-child').forEach((m,i)=>m.insertAdjacentHTML('beforeend',`<a class="link" href="#${['aluminio','cuero','imanes'][i]}">Saber más</a>`));
+
+const baseAdd=add;
+add=id=>{baseAdd(id);$('#count').animate([{transform:'scale(1)'},{transform:'scale(1.8)'},{transform:'scale(1)'}],400)};
+$('#count').style.display='inline-block';
+
+const stage=$('#hero'),SHOW=[1,9,11,10];
+let s=0;
+const goHero=()=>location.hash='p-'+SHOW[s];
+stage.tabIndex=0;
+stage.setAttribute('aria-label','Ver producto destacado');
+stage.onclick=goHero;
+stage.onkeydown=e=>{if(e.key==='Enter')goHero()};
+if(!calm)setInterval(()=>{
+  if(dlg.open||stage.matches(':hover,:focus'))return;
+  s=(s+1)%SHOW.length;
+  const p=find(SHOW[s]);
+  stage.style.setProperty('--c',COL[p.sel][1]);
+  stage.innerHTML=art(p);
+  stage.animate([{opacity:.3},{opacity:1}],600);
+},3500);
+
+drawCats();drawGrid();route();
+reveal('h2,.mat,.scene');
+</script>
+</body>
+</html>
